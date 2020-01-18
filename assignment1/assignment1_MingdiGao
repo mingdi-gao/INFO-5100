@@ -1,0 +1,308 @@
+1. Buy a Camera from Amazon.com
+Objects and Behaviors:
+
+Customer
+	Data: Name, Address, Payment
+	Behavior: searchItems, checkout, placeOrders, addPayment, addAddress, loginToAccount, logout
+
+Item
+	Data: Name, Category, Price, Inventory, Description, Detail
+	Behavior: editQuantity, applyDiscount
+
+Order
+	Data: TransactionID, dateOfOrder, estimatedDeliveredDate, Items, TotalPrice
+	Behavior: cancelOrder,
+
+Payment
+	Data: cardNumber, cvvCode, expireDate, billingAddress, Name
+	Behavior: editNumber, editCvvCOde, editExpireDate, isValidCard
+
+Address
+	Date: Address1, Address2, State,Country
+	Behavior: editAddress, editState, editCountry, useDefaultAddress, saveAsDefault
+
+Sequence of Flow - Buy a Cammera from Amazon.com
+
+Customer stephen;
+stephen.loginToAccount -> amazon : authorize
+if (authorize is true)
+	Item camera = stephen.searchItems("Camera");
+	Payment card = addPayment(cardnumber, cvv, expiredate, name);
+	if (card.isValidCard)
+		Address newAddress = stephen.addAddress(Address1, Address2, State, Country);
+		Order orderOfCamera = stephen.checkoutOrder(camera, card, newAddress);
+		stephen.placeOrder(orderOfCamera)
+	else 
+		stephen.tryAnotherCard
+else
+	stephen.cantLoggin
+end
+
+2. Design a platform for buying tickets of local events.
+User can 
+	a. Login platform
+	b. Set schedule and location
+	c. Buy ticket from a local event
+	d. Cancel the ticket
+
+ Class: User
+ Data: name, phone, userLocation, userSchedule, ticket
+ Behaviour:
+ loginApp() {
+ 	App.login(name);
+ }
+
+ cancel() {
+ 	App.cancelTicket()
+ }
+
+ Class: Event
+ Data: name, eventLocation, eventSchedule, hasTicket
+ Behavior:
+
+ isValid(userSchedule) {
+ 	if (userSchedule in eventShcedule)
+ 		return true;
+	return false;
+ }
+
+ Class: CreditCard
+ Data: type, bankName, cardNumber, address, securityCode, expireDate
+ Behaviour:
+ cardAvailable() {
+ 	Date curretnDate = new Date();
+ 	return currentDate.compareTo(expireDate);
+ }
+
+ Class: App
+ Data:
+ Behavior:
+ login(name) {
+  	List<String> nameList;
+ 	foreach(String name in nameList) {
+ 		if (userName == name)
+ 			status = true;
+ 	}
+ 	status - false;
+ }
+
+ cancelTicket(ticket) {
+  Alert(user)
+  creditcard.refund(ticket)
+ }
+
+ Class: EventService
+ Date: 
+ Behaviour:
+ findEvent(userLoaction) {
+ 	List<Event> eventList
+ 	List<Event> validEventList
+ 	Event event
+ 	foreach (Event e in eventList) {
+ 		if (userLocation == e.eventLocation && event.isValid(userSchedule) {
+ 			validEventList.add(e)
+ 		}
+ 	}
+ 	return validEventList
+
+ }
+ 
+3. Design an app to book a doctor's appointment using your medical insurance provider
+User can 
+ a. Login App
+ b. Select Schedule and miles from home
+ c. Book appointment from a doctor
+ d. Review, edit the appointment
+ e. Cancel
+
+ Class: User
+ Data: name, phone, userLocation, insuranceProvider, userSchedule, appointment
+ Behaviour:
+ loginApp() {
+ 	App.login(name);
+ }
+ 
+ findDoctor() {
+ 	MapService.findDoctor(userShedule, insuranceProvider)
+ }
+ cancel() {
+ 	App.AppointmentEnd()
+ }
+
+ Class: Doctor 
+ Data: name, phone, doctorLocation, schedule, appointment
+ Behaviour:
+ confirmSchedule(userSchedul, insuranceProvider) {
+ 	List<Provider> listProvider;
+ 	List<Schedule> validSchedule
+
+ 	if (insuranceProvider in listProvider) {
+ 		if (userSchedule in validSchedule) {
+ 			return true
+ 		}
+ 		user.reschedule
+ 	}
+ 	System.out.print(invalidProvide)
+ 	return false;
+ }
+
+ AppointmentDone() {
+ 	App.appointmentEnd()
+ }
+
+ Class: App
+ Dataa: status
+ Behavior:
+ login(userName) {
+ 	List<String> nameList;
+ 	foreach(String name in nameList) {
+ 		if (userName == name)
+ 			status = true;
+ 	}
+ 	status - false;
+ }
+ match(userData) {
+ 	List<T> info;
+ 	Doctor doctor = MapService.findDoctor(userData.userLocation);
+ 	info.add(userData);
+ 	info.add(driver.Data);
+ 	Doctor.appointment = info;
+ 	User.appointment = info;
+ }
+
+ appointmentEnd() {
+ 	alert(Doctor)
+ 	alert(User)
+ 	Doctor.appointment = null;
+ 	User.appointment = null;
+ }
+
+ Class: MapService
+ Data: milesLimit
+ BehaviourL
+ findDoctor(userLocation) {
+ 	List<Doctor> docList;
+ 	Doctor doctor;
+ 	foreach (Doctor doc in docList) {
+ 		if (doc.docLocationToUser < milesLimit) {
+ 			if doc.isValid(insuranceProvider)
+ 				doctor = doc;
+ 		}
+ 	}
+
+ 	if (Doctor.confirmAppointment(userSchedule) == false) {
+ 		doctor = this.findDoctor(userLocation) 
+ 	}
+ 	return doctor
+ }
+ 
+
+
+
+
+4. Design a job searching platform
+User can 
+	a. Login platform
+	b. Edit profile and resume
+	c. Search based on keyword
+	d. Cancel 
+
+ Class: User
+ Data: name, phone, userLocation, profile, resume, userKeyword
+ Behaviour:
+ loginApp() {
+ 	App.login(name);
+ }
+
+ searrchOnKeyword(userKeyword) {
+ 	SearchService.serachOnKeyworkd(userKeyword)
+ }
+
+ cancel() {
+ 	App.logout()
+ }
+
+ Class: Job
+ Data: name, requirement, desciprtion.
+ Behavior:
+
+ isValid(userKeyword) {
+ 	if (userSchedule in desciprtion)
+ 		return true;
+	return false;
+ }
+
+ Class: App
+ Data:
+ Behavior:
+ login(name) {
+  	List<String> nameList;
+ 	foreach(String name in nameList) {
+ 		if (userName == name)
+ 			status = true;
+ 	}
+ 	status - false;
+ }
+
+ logout() {
+ 	user = null;
+ }
+
+ Class: SearchService
+ Date: 
+ Behaviour:
+ SearchOnKeywords(userKeyword) {
+ 	List<Job> jobList
+ 	List<Job> validJobList
+ 	foreach (Event e in eventList) {
+ 		if ( e.isValid(userKeyword) ) {
+ 			validEventList.add(e)
+ 		}
+ 	}
+ 	return validEventList
+
+ }
+
+
+
+
+5. Order Pizza from Dominos
+
+Objects and Behaviors:
+
+Customer
+	Data: Name, Address, Payment, 
+	Behavior: searchPizza, checkout, placeOrders, addPayment, addAddress, login, editProfile
+
+Pizza
+	Data: Name, Category, Price,
+	Behavior: editQuantity, applyDiscount
+
+Order
+	Data: TransactionID, dateOfOrder, estimatedDeliveredDate, Items, TotalPrice
+	Behavior: cancelOrder
+
+Payment
+	Data: cardNumber, cvvCode, expireDate, billingAddress, Name
+	Behavior: editNumber, editCvvCOde, editExpireDate, isValidCard
+
+Address
+	Date: Address1, Address2, State, Country
+	Behavior: editAddress, editState, editCountry, saveAsDefault
+
+Sequence of Flow - Buy a Cammera from Amazon.com
+
+Customer stephen;
+stephen.login -> Dominos : authorize
+if (authorize is true)
+	Pizza myPizza = stephen.searchPizza;
+	Payment card = stephen.addPayment(cardnumber, cvv, expiredate, name);
+	if (card.isValidCard)
+		Address newAddress = stephen.addAddress(Address1, Address2, State, Country);
+		Order orderOfPizza = stephen.checkoutOrder(camera, card, newAddress);
+		stephen.placeOrder(orderOfPizza)
+	else 
+		tryAnotherCard
+else
+	cantOrderPizza
+end
