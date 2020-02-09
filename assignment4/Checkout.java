@@ -41,12 +41,15 @@ public class Checkout {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%" + DessertShoppe.maxWidth + "s","    " + DessertShoppe.ShopName));
         sb.append("\n");
-        sb.append("       ------------");
+        sb.append("      ------------------");
         sb.append("\n");
         for (DessertItem i: listOfDessertItems) {
             sb.append(i.toString());
             sb.append("\n");
         }
+        sb.append(String.format("%-"+ DessertShoppe.maxSizeOfItemName + "s%" + DessertShoppe.maxWidth + "s", "Tax", DessertShoppe.cents2dollarsAndCents(totalTax())));
+        sb.append("\n");
+        sb.append(String.format("%-"+ DessertShoppe.maxSizeOfItemName + "s%" + DessertShoppe.maxWidth + "s", "Total Cost", DessertShoppe.cents2dollarsAndCents(totalCost() + totalTax())));
         return sb.toString();
     }
 }

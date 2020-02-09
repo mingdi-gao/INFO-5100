@@ -15,6 +15,8 @@ public class Sundae extends IceCream {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-"+ DessertShoppe.maxSizeOfItemName + "s", topping + " with"));
+        sb.append("\n");
         sb.append(String.format("%-"+ DessertShoppe.maxSizeOfItemName + "s%" + DessertShoppe.maxWidth + "s", name, DessertShoppe.cents2dollarsAndCents(getCost())));
         return sb.toString();
     }
