@@ -40,7 +40,7 @@ public class SumValue extends Thread{
         int size = arr.length / THREAD_NUM;
 
         SumValue[] sums = new SumValue[THREAD_NUM];
-        for (int i = 0; i < sums.length; i++) {
+        for (int i = 0; i < THREAD_NUM; i++) {
             sums[i] = new SumValue(arr, i* size, (i + 1) * size);
             sums[i].start();
         }
